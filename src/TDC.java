@@ -5,43 +5,58 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import org.apache.commons.lang3.StringUtils;
+
 public class TDC
 {	
 	public static void main(String[] args) throws IOException
 	{		
-		String name = args[0];
+		int rows, sopo;
+		String name, str, fileBody, tempFileBody;
 		
-		BufferedReader in = new BufferedReader(new FileReader(name));
-
-			String str;
+		name = args[0];
+		rows = 0;
+		sopo = 0;
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(name));
 
 			List<String> list = new ArrayList<String>();
-			
-			int counter = 0;
+				
 			while((str = in.readLine()) != null)
 			{
 				list.add(str+"\n");
-				counter++;
+				rows++;
+			}
+				
+			in.close();
+			
+			StringBuilder builder = new StringBuilder();
+			
+			for (String value : list)
+			{
+			    builder.append(value);
 			}
 			
-			in.close();
-		
-		StringBuilder builder = new StringBuilder();
-		
-		for (String value : list)
-		{
-		    builder.append(value);
+			fileBody = builder.toString();
+			
+			tempFileBody = fileBody.replaceAll("creationid=\".*\"", "creationid=\"SOPOLTRAD\"");
+			
+			sopo += StringUtils.countMatches(tempFileBody, "SOPOLTRAD");
+			
+			PrintWriter save = new PrintWriter(name+"_Sopoltrad.tmx");
+			
+			save.print(tempFileBody);
+			save.close();
+			JOptionPane.showMessageDialog(null, "Odczytano wierszy: "+rows+"\nZmieniono pozycji: "+sopo+"\n\n", "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Błędna nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
 		}
 		
-		String fileBody = builder.toString();
-		
-		String tempFileBody = fileBody.replaceAll("creationid=\".*\"", "creationid=\"SOPOLTRAD\"");
-		
-		PrintWriter save = new PrintWriter(name+"_Sopoltrad.tmx");
-		
-		save.print(tempFileBody);
-		save.close();
-		
-		System.out.println("Zmieniono "+counter+" linii.");
+//		System.out.println("Odczytano wierszy:\t"+rows);
+//		System.out.println("Zmieniono pozycji:\t"+sopo);
 	}
 }
