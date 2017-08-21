@@ -1,2 +1,2 @@
 @echo off
-java -jar -Dfile.encoding=UTF-8 d:\Development\tdc_test_jar\tdc.jar %CD%\%1
+java -jar -Dfile.encoding=UTF-8 D:\base\tdc.jar "%CD%\%1"

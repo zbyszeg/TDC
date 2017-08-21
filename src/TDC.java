@@ -14,9 +14,11 @@ public class TDC
 	public static void main(String[] args) throws IOException
 	{		
 		int rows, sopo;
-		String name, str, fileBody, tempFileBody;
+		String name, file, str, fileBody, tempFileBody;
 		
-		name = args[0];
+		file = args[0];
+		name = file+".tmx";
+		
 		rows = 0;
 		sopo = 0;
 		try {
@@ -45,15 +47,15 @@ public class TDC
 			
 			sopo += StringUtils.countMatches(tempFileBody, "SOPOLTRAD");
 			
-			PrintWriter save = new PrintWriter(name+"_Sopoltrad.tmx");
+			PrintWriter save = new PrintWriter(file+"_Sopoltrad.tmx");
 			
 			save.print(tempFileBody);
 			save.close();
-			JOptionPane.showMessageDialog(null, "Odczytano wierszy: "+rows+"\nZmieniono pozycji: "+sopo+"\n\n", "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Odczytane wiersze: "+rows+"\nZmienione segmenty: "+sopo, "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "Błędna nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
 		}
 		
 //		System.out.println("Odczytano wierszy:\t"+rows);
