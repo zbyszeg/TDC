@@ -1,3 +1,11 @@
+/*
+ * TMX Data Converter
+ * Autor: Zbigniew Góra
+ * sierpień 2017
+ * 
+ * Program usuwa właściwości klienta/tłumacza z plików TMX
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
