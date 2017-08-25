@@ -1,3 +1,5 @@
+#define _WIN32_WINNT 0x500
+
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -7,6 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+
     ShowWindow(GetConsoleWindow(), 0);
 
     string name, line, command;
@@ -18,7 +21,7 @@ int main(int argc, char* argv[])
 
     file.open("dir.txt", ios::in);
     getline(file, line);
-    command = "@java -jar -Dfile.encoding=UTF-8 D:\\base\\tdc.jar \""+line+"\\"+name+"\"";
+    command = "java -jar -Dfile.encoding=UTF-8 C:\\base\\tdc.jar \""+line+"\\"+name+"\"";
     file.close();
 
     system("@del dir.txt");
