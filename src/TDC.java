@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,6 +23,26 @@ public class TDC
 {	
 	public static void main(String[] args) throws IOException
 	{		
+		try {
+            // Set cross-platform Java L&F (also called "Metal")
+        UIManager.setLookAndFeel(
+        		"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+	    } 
+	    catch (UnsupportedLookAndFeelException e) {
+	       // handle exception
+	    }
+	    catch (ClassNotFoundException e) {
+	       // handle exception
+	    }
+	    catch (InstantiationException e) {
+	       // handle exception
+	    }
+	    catch (IllegalAccessException e) {
+	       // handle exception
+	    }
+
+//		SwingUtilities.updateComponentTreeUI(this);
+		
 		int rows, sopo;
 		String name, file, str, fileBody, tempFileBody;
 		
@@ -61,7 +83,7 @@ public class TDC
 			
 			save.print(tempFileBody);
 			save.close();
-			JOptionPane.showMessageDialog(null, "Odczytane wiersze: "+rows+"\nZmienione segmenty: "+(sopo-1), "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Odczytane wiersze:        "+rows+"\nZmienione segmenty:   "+(sopo-1), "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
