@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,10 +29,6 @@ public class TDC
 		
 		rows = 0;
 		sopo = 0;
-		
-		JProgressBar bar = new JProgressBar();
-		bar.setValue(0);
-		bar.setStringPainted(true);
 		
 		try {
 			
@@ -70,11 +64,7 @@ public class TDC
 			JOptionPane.showMessageDialog(null, "Odczytane wiersze: "+rows+"\nZmienione segmenty: "+(sopo-1), "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
 		}
-		
-//		System.out.println("Odczytano wierszy:\t"+rows);
-//		System.out.println("Zmieniono pozycji:\t"+sopo);
 	}
 }
