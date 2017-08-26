@@ -51,7 +51,7 @@ public class TDC
 			BufferedReader in = new BufferedReader(new FileReader(name));
 
 			List<String> list = new ArrayList<String>();
-				
+			
 			while((str = in.readLine()) != null)
 			{
 				list.add(str+"\n");
@@ -77,10 +77,12 @@ public class TDC
 			
 			save.print(tempFileBody);
 			save.close();
+
 			JOptionPane.showMessageDialog(null, "Odczytane wiersze:        "+rows+"\nZmienione segmenty:   "+(sopo-1), "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
-			
+		
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
 		}
+
 	}
 }
