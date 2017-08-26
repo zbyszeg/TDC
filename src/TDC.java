@@ -38,17 +38,27 @@ public class TDC
 	    }
 		
 		int rows, sopo;
-		String name, file, str, fileBody, tempFileBody;
+		String name, file, str, fileBody, tempFileBody, location;
 		
-		file = args[0];
-		name = file+".tmx";
+		location = args[0];
+		
+		name = JOptionPane.showInputDialog(null, "Wprowadź nazwę pliku (bez rozszerzenia)", "TMX Data Changer @ Sopoltrad", JOptionPane.QUESTION_MESSAGE);;
+		
+		if(name==null)
+			System.exit(1);
+		
+		file = location+"\\"+name+".tmx";
 		
 		rows = 0;
 		sopo = 0;
 		
-		try {
+		Window Okno = new Window();
+		
+		try
+		{
+			Okno.setVisible(true);
 			
-			BufferedReader in = new BufferedReader(new FileReader(name));
+			BufferedReader in = new BufferedReader(new FileReader(file));
 
 			List<String> list = new ArrayList<String>();
 			
@@ -73,15 +83,20 @@ public class TDC
 			
 			sopo += StringUtils.countMatches(tempFileBody, "SOPOLTRAD");
 			
-			PrintWriter save = new PrintWriter(file+"_Sopoltrad.tmx");
+			PrintWriter save = new PrintWriter(name+"_Sopoltrad.tmx");
 			
 			save.print(tempFileBody);
 			save.close();
+			
+			Okno.setVisible(false);
 
 			JOptionPane.showMessageDialog(null, "Odczytane wiersze:        "+rows+"\nZmienione segmenty:   "+(sopo-1), "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
-		
-		} catch (Exception e) {
+			System.exit(0);
+		}
+		catch (Exception e)
+		{
 			JOptionPane.showMessageDialog(null, "Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
+			System.exit(1);
 		}
 
 	}
