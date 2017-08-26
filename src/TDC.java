@@ -1,9 +1,7 @@
 /*
- * TMX Data Converter
- * Autor: Zbigniew Góra
- * sierpień 2017
- * 
- * Program usuwa właściwości klienta/tłumacza z plików TMX
+ * TMX Data Converter @ Sopoltrad
+ * Author: Zbigniew Góra
+ * August 2017
  */
 
 import java.io.BufferedReader;
@@ -24,9 +22,7 @@ public class TDC
 	public static void main(String[] args) throws IOException
 	{		
 		try {
-            // Set cross-platform Java L&F (also called "Metal")
-        UIManager.setLookAndFeel(
-        		"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 	    } 
 	    catch (UnsupportedLookAndFeelException e) {
 	       // handle exception
@@ -40,8 +36,6 @@ public class TDC
 	    catch (IllegalAccessException e) {
 	       // handle exception
 	    }
-
-//		SwingUtilities.updateComponentTreeUI(this);
 		
 		int rows, sopo;
 		String name, file, str, fileBody, tempFileBody;
