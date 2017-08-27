@@ -37,67 +37,67 @@ public class TDC
 	       // handle exception
 	    }
 		
-		int rows, sopo;
+		int rows, sopo, condition;
 		String name, file, str, fileBody, tempFileBody, location;
 		
 		location = args[0];
 		
-		name = JOptionPane.showInputDialog(null, "Wprowadź nazwę pliku (bez rozszerzenia)", "TMX Data Changer @ Sopoltrad", JOptionPane.QUESTION_MESSAGE);;
-		
-		if(name==null)
-			System.exit(1);
-		
-		file = location+"\\"+name+".tmx";
-		
-		rows = 0;
-		sopo = 0;
-		
-		Window Okno = new Window();
-		
-		try
-		{
-			Okno.setVisible(true);
+		condition = 0;
+		while (condition !=1 ) {
+			name = JOptionPane.showInputDialog(null, "Wprowadź nazwę pliku", "TMX Data Changer @ Sopoltrad",
+					JOptionPane.QUESTION_MESSAGE);
 			
-			BufferedReader in = new BufferedReader(new FileReader(file));
+			if (name == null)
+				System.exit(1);
+			if (!name.contains(".tmx") && !name.contains(".TMX"))
+				name += ".tmx";
+			file = location + "\\" + name;
+			rows = 0;
+			sopo = 0;
+			Window Okno = new Window();
+			try {
+				Okno.setVisible(true);
 
-			List<String> list = new ArrayList<String>();
-			
-			while((str = in.readLine()) != null)
-			{
-				list.add(str+"\n");
-				rows++;
-			}
-				
-			in.close();
-			
-			StringBuilder builder = new StringBuilder();
-			
-			for (String value : list)
-			{
-			    builder.append(value);
-			}
-			
-			fileBody = builder.toString();
-			
-			tempFileBody = fileBody.replaceAll("creationid=\".*\"", "creationid=\"SOPOLTRAD\"");
-			
-			sopo += StringUtils.countMatches(tempFileBody, "SOPOLTRAD");
-			
-			PrintWriter save = new PrintWriter(name+"_Sopoltrad.tmx");
-			
-			save.print(tempFileBody);
-			save.close();
-			
-			Okno.setVisible(false);
+				BufferedReader in = new BufferedReader(new FileReader(file));
 
-			JOptionPane.showMessageDialog(null, "Odczytane wiersze:        "+rows+"\nZmienione segmenty:   "+(sopo-1), "Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
-			System.exit(0);
+				List<String> list = new ArrayList<String>();
+
+				while ((str = in.readLine()) != null) {
+					list.add(str + "\n");
+					rows++;
+				}
+
+				in.close();
+
+				StringBuilder builder = new StringBuilder();
+
+				for (String value : list) {
+					builder.append(value);
+				}
+
+				fileBody = builder.toString();
+
+				tempFileBody = fileBody.replaceAll("creationid=\".*\"", "creationid=\"SOPOLTRAD\"");
+
+				sopo += StringUtils.countMatches(tempFileBody, "SOPOLTRAD");
+
+				PrintWriter save = new PrintWriter(name);
+
+				save.print(tempFileBody);
+				save.close();
+
+				Okno.setVisible(false);
+				condition = 1;
+				JOptionPane.showMessageDialog(null,
+						"Odczytane wiersze:        " + rows + "\nZmienione segmenty:   " + (sopo - 1),
+						"Zakończono pomyślnie", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,
+						"Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!",
+						JOptionPane.ERROR_MESSAGE);
+				Okno.setVisible(false);
+			} 
 		}
-		catch (Exception e)
-		{
-			JOptionPane.showMessageDialog(null, "Nieprawidłowa nazwa pliku lub brak pliku w folderze. Spróbuj ponownie.", "Błąd!", JOptionPane.ERROR_MESSAGE);
-			System.exit(1);
-		}
-
+		System.exit(0);
 	}
 }
